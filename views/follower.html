@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+
+    <h1>{{ title }}</h1>
+
+    <br />
+
+    <form method="post" action="/api/follower/{{follower.id}}?_method=PUT">
+      <div class="form-group">
+        <label>Follower name</label>
+        <input type="text" name="name" class="form-control" value="{{follower.name}}" required>
+        <label>Twitch url</label>
+        <input type="text" name="url" class="form-control" value="{{follower.url}}" required>
+      </div>
+      <button type="submit" class="btn btn-default">Update</button>
+    </form>
+
+    <br />
+
+    <form method="post" action="/api/follower/{{follower.id}}?_method=DELETE" class="form-inline">
+      <button type="submit" class="btn btn-default">Delete</button>
+    </form>
+    
+    <br />
+
+    <form class="form-inline">
+      <a href="/api/followers" class="btn btn-default">Home</a>
+    </form>
+
+  </div>
+
+{% endblock %}

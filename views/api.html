@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+
+    <h1>{{ title }}</h1>
+
+    <br>
+
+    <form method="post" action="/api/followers" class="form-inline">
+      <div class="form-group">
+        <label>Follower name</label>
+        <input type="text" name="name" class="form-control" required>
+        <label>Twitch Url</label>
+        <input type="text" name="url" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-default">Save</button>
+    </form>
+
+    <hr><br>
+
+    <h2>All Followers</h2>
+
+    <ul>
+    {% for follower in following %}
+      <li><a href="/api/follower/{{follower.id}}">{{follower.name}}</a></li>
+    {% endfor %}
+    </ul>
+
+  </div>
+
+{% endblock %}
