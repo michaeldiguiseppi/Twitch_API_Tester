@@ -6,19 +6,13 @@ var Following = mongoose.model('following');
 /* GET users listing. */
 router.get('/followers', function(req, res, next) {
   Following.find(function(err, following){
-    console.log(following)
-    res.render(
-      'api',
-      {title : 'Twitch API', following : following}
-    );
+    res.render('api', {title : 'Twitch API', following : following});
   });
 });
 
 router.get('/follower/:id', function(req, res, next) {
-  console.log(req.params);
   var query = {'_id': req.params.id};
   Following.findOne(query, function(err, follower){
-    console.log(follower)
     res.render(
       'follower',
       {title : 'Follower API - ' + follower.name, follower : follower}
@@ -29,7 +23,6 @@ router.get('/follower/:id', function(req, res, next) {
 router.post('/followers', function(req, res, next) {
   new Following({name : req.body.name, url: req.body.url})
   .save(function(err, follower) {
-    console.log(follower)
     res.redirect('/api/followers');
   });
 });
@@ -39,7 +32,6 @@ router.put('/follower/:id', function(req, res) {
   var update = {name : req.body.name, url: req.body.url};
   var options = {new: true};
   Following.findOneAndUpdate(query, update, options, function(err, follower){
-    console.log(follower)
     res.redirect('/api/followers');
     // res.render(
     //   'follower',
